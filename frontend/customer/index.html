@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Digital - AI-Powered Solutions</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .hero {
+            padding: 120px 2rem 60px;
+            text-align: center;
+            color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            padding: 2rem;
+            z-index: 1001;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="color: var(--primary);">Apex Digital</h2>
+            <div>
+                <button onclick="toggleCart()" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">
+                    Cart (<span id="cart-count">0</span>)
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1 style="font-size: 3rem; margin-bottom: 1rem;">AI-Powered Digital Solutions</h1>
+        <p style="font-size: 1.2rem; opacity: 0.9;">Let our synthetic intelligence create your perfect digital presence</p>
+    </section>
+
+    <div class="products-grid" id="products-container">
+        <!-- Products loaded dynamically -->
+    </div>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <h3>Shopping Cart</h3>
+        <div id="cart-items"></div>
+        <button onclick="checkout()" style="background: var(--secondary); color: white; border: none; padding: 1rem; width: 100%; border-radius: 6px; margin-top: 1rem; cursor: pointer;">
+            Checkout - R<span id="cart-total">0</span>
+        </button>
+    </div>
+
+    <script>
+        let cart = [];
+        
+        async function loadProducts() {
+            const response = await fetch('/api/products');
+            const products = await response.json();
+            const container = document.getElementById('products-container');
+            
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <p style="font-size: 1.5rem; color: var(--primary); margin: 1rem 0;">R${product.price}</p>
+                    <button onclick="addToCart(${product.id})" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">
+                        Add to Cart
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+        
+        function addToCart(productId) {
+            // Implementation for adding to cart
+            updateCartUI();
+        }
+        
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+        }
+        
+        function updateCartUI() {
+            // Update cart count and items
+        }
+        
+        function checkout() {
+            // Redirect to checkout page
+            window.location.href = '/checkout';
+        }
+        
+        // Load products on page load
+        loadProducts();
+    </script>
+</body>
+</html>
