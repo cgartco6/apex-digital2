@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Digital - AI-Powered Digital Solutions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1e429f;
+            --secondary: #ffffff;
+            --accent: #f59e0b;
+            --dark: #1f2937;
+            --darker: #111827;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --success: #059669;
+            --warning: #d97706;
+            --error: #dc2626;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a56db 0%, #1e429f 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 140px 2rem 80px;
+            text-align: center;
+            color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Services Grid */
+        .services {
+            padding: 4rem 2rem;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            padding: 2rem;
+            z-index: 1001;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .cart-item-info h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .remove-item {
+            color: var(--error);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .cart-total {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--light);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        /* Chatbot */
+        .chatbot {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(26, 86, 219, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+        }
+        
+        .chatbot-window.open {
+            display: flex;
+        }
+        
+        .chat-header {
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+        
+        .message.bot {
+            background: var(--light);
+            align-self: flex-start;
+        }
+        
+        .message.user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--light);
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--light);
+            border-radius: 8px;
+            outline: none;
+        }
+        
+        .chat-input button {
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1002;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.open {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--light);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--darker);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .footer-section p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+        
+        .whatsapp-link {
+            color: #25D366;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .whatsapp-link:hover {
+            color: #128C7E;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 2rem;
+            background: var(--light);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chatbot-window {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Apex Digital</a>
+            <div class="nav-links">
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+            </div>
+            <div class="auth-buttons">
+                <button onclick="toggleCart()" class="btn btn-outline">
+                    <i class="fas fa-shopping-cart"></i>
+                    Cart (<span id="cart-count">0</span>)
+                </button>
+                <button onclick="openLoginModal()" class="btn btn-outline">Login</button>
+                <button onclick="openRegisterModal()" class="btn btn-primary">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>AI-Powered Digital Solutions That Scale With You</h1>
+        <p>Let our synthetic intelligence create your perfect digital presence. From websites to full marketing campaigns - automated, professional, and affordable.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button onclick="scrollToServices()" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                Explore Services
+            </button>
+            <a href="https://wa.me/27721423215?text=Hello%20Apex%20Digital%2C%20I'm%20interested%20in%20your%20AI-powered%20services" 
+               class="btn btn-whatsapp" style="font-size: 1.1rem; padding: 1rem 2rem; text-decoration: none;">
+                <i class="fab fa-whatsapp"></i> WhatsApp Us
+            </a>
+            <button onclick="openChatbot()" class="btn btn-outline" style="font-size: 1.1rem; padding: 1rem 2rem; background: rgba(255,255,255,0.1); color: white; border-color: white;">
+                Talk to Robyn AI
+            </button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">Our AI-Powered Services</h2>
+        <div class="services-grid" id="services-container">
+            <!-- Services loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="services" style="background: var(--light);">
+        <h2 class="section-title">How It Works</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>1. Choose Your Service</h3>
+                <p>Browse our AI-powered services and select what you need for your business</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>2. Add to Cart & Checkout</h3>
+                <p>Add services to your cart and complete checkout with secure payment</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>3. AI Gets to Work</h3>
+                <p>Our synthetic intelligence team automatically processes your order</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-delivery"></i>
+                </div>
+                <h3>4. Receive Your Solution</h3>
+                <p>Get your completed digital solution delivered within promised timeframe</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>WhatsApp</h3>
+                <p>Quick responses via WhatsApp</p>
+                <a href="https://wa.me/27721423215?text=Hello%20Apex%20Digital%2C%20I'm%20interested%20in%20your%20AI-powered%20services" 
+                   class="btn btn-whatsapp" style="margin-top: 1rem; text-decoration: none;">
+                    <i class="fab fa-whatsapp"></i> Message Us
+                </a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email</h3>
+                <p>Send us an email anytime</p>
+                <a href="mailto:info@apexdigital.com" class="btn btn-primary" style="margin-top: 1rem; text-decoration: none;">
+                    <i class="fas fa-envelope"></i> Email Us
+                </a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Location</h3>
+                <p>Based in Cape Town, serving clients nationwide</p>
+                <button class="btn btn-outline" style="margin-top: 1rem;" onclick="showLocation()">
+                    <i class="fas fa-map-marker-alt"></i> View Location
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Apex Digital</h3>
+                <p>AI-powered digital solutions for modern businesses. Let our synthetic intelligence handle your digital needs.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="https://wa.me/27721423215?text=Hello%20Apex%20Digital%2C%20I'm%20interested%20in%20your%20AI-powered%20services" 
+                       class="btn btn-whatsapp" style="text-decoration: none;">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <div class="contact-info">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/27721423215?text=Hello%20Apex%20Digital%2C%20I'm%20interested%20in%20your%20AI-powered%20services" 
+                       class="whatsapp-link">
+                        072 142 3215
+                    </a>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:info@apexdigital.com" style="color: var(--gray); text-decoration: none;">
+                        info@apexdigital.com
+                    </a>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Cape Town, South Africa</span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#services" style="color: var(--gray); text-decoration: none;">Services</a></p>
+                <p><a href="#how-it-works" style="color: var(--gray); text-decoration: none;">How It Works</a></p>
+                <p><a href="#contact" style="color: var(--gray); text-decoration: none;">Contact</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cart-items">
+            <!-- Cart items loaded dynamically -->
+        </div>
+        <div class="cart-total">
+            Total: R<span id="cart-total">0.00</span>
+        </div>
+        <button onclick="proceedToCheckout()" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 1rem;">
+            Proceed to Checkout
+        </button>
+        <div style="text-align: center; margin-top: 1rem;">
+            <p style="color: var(--gray); font-size: 0.9rem;">Need help? Chat with us!</p>
+            <a href="https://wa.me/27721423215?text=Hello%20Apex%20Digital%2C%20I%20need%20help%20with%20my%20order" 
+               class="btn btn-whatsapp" style="text-decoration: none; width: 100%;">
+                <i class="fab fa-whatsapp"></i> WhatsApp Support
+            </a>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to Your Account</h3>
+                <button class="close-modal" onclick="closeLoginModal()">&times;</button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Don't have an account? <a href="#" onclick="switchToRegister()" style="color: var(--primary);">Register here</a>
+            </p>
+            <div style="text-align: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light);">
+                <p style="color: var(--gray); font-size: 0.9rem;">Need help logging in?</p>
+                <a href="https://wa.me/27721423215?text=Hello%20Apex%20Digital%2C%20I%20need%20help%20with%20login" 
+                   class="btn btn-whatsapp" style="text-decoration: none; width: 100%; margin-top: 0.5rem;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Support
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Your Account</h3>
+                <button class="close-modal" onclick="closeRegisterModal()">&times;</button>
+            </div>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-first-name">First Name</label>
+                    <input type="text" id="register-first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-last-name">Last Name</label>
+                    <input type="text" id="register-last-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email Address</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Phone Number</label>
+                    <input type="tel" id="register-phone" value="072 142 3215">
+                </div>
+                <div class="form-group">
+                    <label for="register-company">Company (Optional)</label>
+                    <input type="text" id="register-company">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Already have an account? <a href="#" onclick="switchToLogin()" style="color: var(--primary);">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot">
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chat-header">
+                <h4>Robyn AI Assistant</h4>
+                <button class="close-cart" onclick="closeChatbot()">&times;</button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot">
+                    Hi! I'm Robyn, your AI assistant. How can I help you today?
+                </div>
+                <div class="message bot">
+                    Need immediate help? <a href="https://wa.me/27721423215?text=Hello%20Apex%20Digital%2C%20I%20need%20assistance" 
+                    style="color: var(--primary); text-decoration: none;">Chat with us on WhatsApp</a>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Ask me anything...">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button class="chatbot-toggle" onclick="toggleChatbot()">
+            <i class="fas fa-robot"></i>
+        </button>
+    </div>
+
+    <script>
+        // Global state
+        let cart = JSON.parse(localStorage.getItem('apex_cart')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('apex_user'));
+        let products = [
+            {
+                id: 1,
+                name: "Basic Website",
+                description: "Professional single-page website with responsive design and contact form. Perfect for small businesses and personal brands.",
+                short_description: "Get your business online with a stunning single-page website",
+                price: 2499.00,
+                category: "website",
+                service_type: "basic",
+                delivery_days: 7,
+                features: ["Responsive Design", "Contact Form", "SEO Optimization", "1 Page", "Basic Hosting", "Mobile Friendly"],
+                requirements: ["Business name", "Logo", "Content ideas", "Color preferences"]
+            },
+            {
+                id: 2,
+                name: "E-Commerce Store",
+                description: "Full online store with product management, shopping cart, and secure payment integration. Start selling online today!",
+                short_description: "Start selling online with a complete e-commerce solution",
+                price: 5999.00,
+                category: "ecommerce",
+                service_type: "standard",
+                delivery_days: 14,
+                features: ["Product Management", "Shopping Cart", "Payment Gateway", "Order Tracking", "Inventory Management", "Admin Dashboard"],
+                requirements: ["Product list", "Business details", "Payment preferences", "Shipping info"]
+            },
+            {
+                id: 3,
+                name: "Content Creation Package",
+                description: "AI-powered content creation for your website, social media, and marketing materials. Engaging content tailored to your brand voice.",
+                short_description: "Engaging content tailored to your brand voice",
+                price: 1299.00,
+                category: "content",
+                service_type: "basic",
+                delivery_days: 3,
+                features: ["Website Copy", "Social Media Posts", "Blog Articles", "SEO Optimization", "Brand Voice Matching", "Content Strategy"],
+                requirements: ["Business type", "Target audience", "Brand guidelines", "Content goals"]
+            },
+            {
+                id: 4,
+                name: "Social Media Marketing",
+                description: "Complete social media management and advertising campaigns across all platforms. Grow your audience and engagement.",
+                short_description: "Grow your audience and engagement across all platforms",
+                price: 2999.00,
+                category: "marketing",
+                service_type: "premium",
+                delivery_days: 7,
+                features: ["Content Strategy", "Post Scheduling", "Audience Analysis", "Performance Tracking", "Ad Management", "Analytics Reports"],
+                requirements: ["Social media accounts", "Marketing goals", "Target audience", "Budget"]
+            },
+            {
+                id: 5,
+                name: "Website + Marketing Bundle",
+                description: "Complete website development with integrated marketing campaign. All-in-one solution for online presence and growth.",
+                short_description: "All-in-one solution for online presence and growth",
+                price: 7999.00,
+                category: "bundle",
+                service_type: "premium",
+                delivery_days: 14,
+                features: ["Professional Website", "SEO Setup", "Social Media Integration", "Email Marketing", "Analytics Dashboard", "Content Creation"],
+                requirements: ["Business overview", "Target market", "Competitors", "Goals and objectives"]
+            },
+            {
+                id: 6,
+                name: "Custom AI Solution",
+                description: "Fully customized AI-powered solution tailored to your specific business needs. Get exactly what you need.",
+                short_description: "Custom AI solution for your unique requirements",
+                price: 12999.00,
+                category: "custom",
+                service_type: "enterprise",
+                delivery_days: 21,
+                features: ["Custom Development", "AI Integration", "API Development", "Advanced Features", "Dedicated Support", "Training"],
+                requirements: ["Detailed requirements", "Business processes", "Integration needs", "Timeline"]
+            }
+        ];
+
+        // DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            updateCartUI();
+            checkAuthStatus();
+            
+            // Add form event listeners
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('register-form').addEventListener('submit', handleRegister);
+        });
+
+        // Render products grid
+        function renderProducts() {
+            const container = document.getElementById('services-container');
+            container.innerHTML = '';
+
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.innerHTML = `
+                    <div class="service-icon">
+                        <i class="fas fa-${getServiceIcon(product.category)}"></i>
+                    </div>
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <div class="price">R${product.price.toFixed(2)}</div>
+                    <div style="margin-bottom: 1rem;">
+                        ${product.features.map(feature => 
+                            `<div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="fas fa-check" style="color: var(--success);"></i>
+                                <span>${feature}</span>
+                            </div>`
+                        ).join('')}
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button onclick="addToCart(${product.id})" class="btn btn-primary" style="flex: 1;">
+                            Add to Cart - R${product.price.toFixed(2)}
+                        </button>
+                        <a href="https://wa.me/27721423215?text=Hello%20Apex%20Digital%2C%20I'm%20interested%20in%20the%20${encodeURIComponent(product.name)}%20service%20for%20R${product.price.toFixed(0)}" 
+                           class="btn btn-whatsapp" style="text-decoration: none;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Get appropriate icon for service
+        function getServiceIcon(category) {
+            const icons = {
+                'website': 'globe',
+                'content': 'file-alt',
+                'marketing': 'bullhorn',
+                'ecommerce': 'shopping-cart',
+                'security': 'shield-alt',
+                'bundle': 'star',
+                'custom': 'cogs'
+            };
+            return icons[category.toLowerCase()] || 'magic';
+        }
+
+        // Cart functionality
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const existingItem = cart.find(item => item.productId === productId);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        productId: product.id,
+                        name: product.name,
+                        price: product.price,
+                        quantity: 1
+                    });
+                }
+                saveCart();
+                updateCartUI();
+                showNotification(`${product.name} added to cart!`);
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.productId !== productId);
+            saveCart();
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+            const cartItems = document.getElementById('cart-items');
+            
+            // Update count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = total.toFixed(2);
+            
+            // Update items list
+            cartItems.innerHTML = '';
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: var(--gray);">Your cart is empty</p>';
+            } else {
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>R${item.price.toFixed(2)} x ${item.quantity}</p>
+                            <p><strong>R${(item.price * item.quantity).toFixed(2)}</strong></p>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${item.productId})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+            }
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+        }
+
+        function saveCart() {
+            localStorage.setItem('apex_cart', JSON.stringify(cart));
+        }
+
+        // Checkout
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!', 'error');
+                return;
+            }
+            
+            if (!currentUser) {
+                openLoginModal();
+                showNotification('Please login to continue', 'warning');
+                return;
+            }
+            
+            // For demo purposes - in real implementation, this would redirect to checkout page
+            showNotification('Proceeding to checkout...', 'success');
+            // window.location.href = '/checkout.html';
+        }
+
+        // Auth functionality
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.add('open');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.remove('open');
+        }
+
+        function openRegisterModal() {
+            document.getElementById('register-modal').classList.add('open');
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('register-modal').classList.remove('open');
+        }
+
+        function switchToRegister() {
+            closeLoginModal();
+            openRegisterModal();
+        }
+
+        function switchToLogin() {
+            closeRegisterModal();
+            openLoginModal();
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Mock login - in real implementation, this would call your backend
+            if (email && password) {
+                const user = {
+                    id: 1,
+                    email: email,
+                    first_name: 'John',
+                    last_name: 'Doe'
+                };
+                
+                currentUser = user;
+                localStorage.setItem('apex_user', JSON.stringify(user));
+                localStorage.setItem('apex_token', 'mock-jwt-token');
+                
+                closeLoginModal();
+                checkAuthStatus();
+                showNotification('Login successful!', 'success');
+            } else {
+                showNotification('Please fill in all fields', 'error');
+            }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const formData = {
+                firstName: document.getElementById('register-first-name').value,
+                lastName: document.getElementById('register-last-name').value,
+                email: document.getElementById('register-email').value,
+                password: document.getElementById('register-password').value,
+                phone: document.getElementById('register-phone').value,
+                company: document.getElementById('register-company').value
+            };
+            
+            // Mock registration - in real implementation, this would call your backend
+            if (formData.firstName && formData.lastName && formData.email && formData.password) {
+                const user = {
+                    id: Date.now(),
+                    email: formData.email,
+                    first_name: formData.firstName,
+                    last_name: formData.lastName,
+                    phone: formData.phone,
+                    company: formData.company
+                };
+                
+                currentUser = user;
+                localStorage.setItem('apex_user', JSON.stringify(user));
+                localStorage.setItem('apex_token', 'mock-jwt-token');
+                
+                closeRegisterModal();
+                checkAuthStatus();
+                showNotification('Registration successful!', 'success');
+            } else {
+                showNotification('Please fill in all required fields', 'error');
+            }
+        }
+
+        function checkAuthStatus() {
+            if (currentUser) {
+                document.querySelector('.auth-buttons').innerHTML = `
+                    <button onclick="toggleCart()" class="btn btn-outline">
+                        <i class="fas fa-shopping-cart"></i>
+                        Cart (<span id="cart-count">0</span>)
+                    </button>
+                    <button onclick="viewDashboard()" class="btn btn-outline">Dashboard</button>
+                    <button onclick="logout()" class="btn btn-primary">Logout</button>
+                `;
+                updateCartUI(); // Refresh cart count
+            }
+        }
+
+        function viewDashboard() {
+            showNotification('Redirecting to dashboard...', 'info');
+            // window.location.href = '/dashboard';
+        }
+
+        function logout() {
+            localStorage.removeItem('apex_user');
+            localStorage.removeItem('apex_token');
+            currentUser = null;
+            location.reload();
+        }
+
+        // Chatbot functionality
+        function toggleChatbot() {
+            document.getElementById('chatbot-window').classList.toggle('open');
+        }
+
+        function openChatbot() {
+            document.getElementById('chatbot-window').classList.add('open');
+        }
+
+        function closeChatbot() {
+            document.getElementById('chatbot-window').classList.remove('open');
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addChatMessage(message, 'user');
+            input.value = '';
+            
+            try {
+                // Simulate AI response
+                const responses = [
+                    "I can help you with our AI-powered services! What would you like to know?",
+                    "Our AI agents can create websites, marketing campaigns, and much more. Which service interests you?",
+                    "I'd be happy to help you choose the right service for your business needs.",
+                    "All our services include military-grade security and are fully automated by our AI team.",
+                    "We offer affordable pricing in ZAR with quick delivery times.",
+                    "Need immediate assistance? You can also reach us on WhatsApp for quick help!"
+                ];
+                
+                const response = responses[Math.floor(Math.random() * responses.length)];
+                
+                // Simulate typing delay
+                setTimeout(() => {
+                    addChatMessage(response, 'bot');
+                }, 1000);
+                
+            } catch (error) {
+                addChatMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            }
+        }
+
+        function addChatMessage(message, sender) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            if (sender === 'bot' && message.includes('WhatsApp')) {
+                messageDiv.innerHTML = message;
+            } else {
+                messageDiv.textContent = message;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Utility functions
+        function scrollToServices() {
+            document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showLocation() {
+            showNotification('We are based in Cape Town, South Africa. Contact us for specific location details.', 'info');
+        }
+
+        function showNotification(message, type = 'success') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                background: ${type === 'error' ? 'var(--error)' : type === 'warning' ? 'var(--warning)' : 'var(--success)'};
+                color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                z-index: 1002;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Enter key for chatbot
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
